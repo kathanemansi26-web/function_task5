@@ -1,0 +1,45 @@
+select * from college
+
+create or replace function total_student_status(total_student float)
+RETURNs varchar as $$
+DECLARE r_total_student TEXT;
+BEGIN
+If total_student <= 200 Then r_total_student := 'B';
+elseif total_student <= 500 then r_total_student := 'C';
+else r_total_student := 'A';
+
+end if;
+return r_total_student;
+END;
+
+$$ language plpgsql
+
+select total_student_statuss(300)
+
+
+select * from college
+
+create or replace function total_staff_status(total_staff float) 
+returns table (
+r_total_staff text
+)
+as $$
+Begin
+select r_total_staff
+from college as r
+where r_total_staff >= 20
+order by r_total_staff desc;
+END;
+
+$$ language plpgsql
+
+select * from total_staff_status()
+
+
+
+
+
+
+
+
+
